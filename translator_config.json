@@ -1,0 +1,28 @@
+{
+  "heb": {
+    "arb": {
+      "model_name":"Helsinki_NLP_opus-mt-heb-ara",
+      "special_tok": "ara"
+    }
+  },
+  "eng": {
+    "heb": {
+      "model_name":"Helsinki_NLP_opus-mt-en-he",
+      "special_tok": "he"
+    },
+    "arb": {
+      "model_name": "Helsinki_NLP_opus-mt-eng-ara",
+      "special_tok": "ara"
+    }
+  },
+  "arb": {
+    "eng":{
+      "model_name": "Helsinki_NLP_opus-mt-ara-eng",
+      "special_tok": "en"
+    },
+    "heb": {
+      "model_name": "Helsinki_NLP_opus-mt-ara-heb",
+      "special_tok": "he"
+    }
+  }
+}
