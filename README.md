@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     result = translator.translate(seq)
 ```
-###API calls
+### API calls
 ```python
 import requests
 
@@ -44,11 +44,11 @@ if __name__ == '__main__':
 
 
 ## Docker
-###build: 
+### build: 
 ```bash
 sudo docker build . -t translation_image
 ```
-###run:
+### run:
 with gpu:
 ```bash
 sudo nvidia-docker run -p 80:80 translation_image
