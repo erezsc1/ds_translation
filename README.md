@@ -7,6 +7,8 @@ Machine Translation RESTful API service. Based on Helsinki-NLP repository, and s
 - English -> Arabic
 - Hebrew -> Arabic
 
+All models are stored in /trained_models/
+New models can be saved in that directory, and update translator_config.json accordingly.
 ## Examples
 ### library calls
 ```python
