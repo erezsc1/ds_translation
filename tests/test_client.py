@@ -17,7 +17,7 @@ if __name__ == '__main__':
         "source_lang": src_lang,
         "target_lang": tgt_lang,
         "data_list": query,
-        "content-type":"application/json"
+        "content-type": "application/json"
     }
     response = requests.get(
         URL,

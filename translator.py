@@ -19,36 +19,56 @@ def timing(f):
     return wrap
 
 
+SPECIAL_CASE_TGT_MAP = {
+    "he": "heb",
+    "ara": "arb",
+    "ar": "arb",
+    "en": "eng"
+}
+
 class Translator():
     def __init__(
             self,
             source_lang="heb",
             target_lang="arb",
-            max_cache_entries=1024
+            max_cache_entries=1024,
+            special_tokens=None
     ):
         '''
         :param source_lang: source langauge to be translated from ["heb","arb","eng"]
         :param target_lang: target langauge to be translated to ["heb","arb", "eng"]
         :param max_cache_entries: maximum entrie
         '''
+
+        self.source_lang = SPECIAL_CASE_TGT_MAP.get(source_lang, source_lang)
+        self.target_lang = SPECIAL_CASE_TGT_MAP.get(target_lang, target_lang)
+        self.special_tokens = special_tokens
+
         with open("translator_config.json", "r") as fp:
             languages_dict = json.load(fp)
         try:
-            pretrained_model = languages_dict[source_lang][target_lang]["model_name"]
-            special_token = languages_dict[source_lang][target_lang]["special_tok"]
+            pretrained_model = languages_dict[self.source_lang][self.target_lang]["model_name"]
+            special_token = languages_dict[self.source_lang][self.target_lang]["special_tok"]
         except:
             raise NotImplementedError
-        self.source_lang = source_lang
-        self.target_lang = target_lang
+
 
         trained_model_path = os.path.join("trained_models", pretrained_model)
         self.special_tok = special_token
 
         # loading models
         self.tokenizer = AutoTokenizer.from_pretrained(trained_model_path)
+
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(self.device)
         self.model : AutoModelWithLMHead = AutoModelWithLMHead.from_pretrained(trained_model_path)
+
+        if self.special_tokens is not None:
+            spec_dict = {"additional_special_tokens": self.special_tokens}
+            num_added = self.tokenizer.add_special_tokens(spec_dict)
+            print(f"number tokens added: {num_added}")
+            self.model.resize_token_embeddings(len(self.tokenizer))  # adding new tokens
+
         self.model.to(self.device)
         self.max_sequence_len = 512
         self.translation_df = pd.DataFrame(columns=["src_text", "tgt_text"])
@@ -64,6 +84,7 @@ class Translator():
         :return: processed string
         '''
         cur_x = self._get_special_token() + x
+        cur_x = cur_x.replace(".", " </s> ")
         return cur_x
 
     def to(self, device):
@@ -101,6 +122,10 @@ class Translator():
             cur_translation_df["src_text"] = x
         elif type(x) == str:
             cur_translation_df["src_text"] = [x]
+        print(cur_translation_df)
+        query_indexes = cur_translation_df.set_index("src_text")
+
+        print(query_indexes)
         indexes_to_check, cached_dataframe = self._check_cache(cur_translation_df)
         if indexes_to_check is not None:
             cur_translation_df = cur_translation_df.loc[indexes_to_check]
@@ -108,11 +133,22 @@ class Translator():
             processed_text_series = cur_translation_df["src_text"].apply(lambda x: self.preprocess(x))
             input_dict = self.tokenizer.prepare_translation_batch(processed_text_series.tolist())
             input_dict.to(self.device)
+            # TODO fix the special tokens feature
+            # special_tokens_attention_mask = ~input_dict["input_ids"] >= torch.Tensor(
+            #     self.tokenizer.additional_special_tokens_ids).min()
             translated = self.model.generate(**input_dict)
             tgt_text = [self.tokenizer.decode(t, skip_special_tokens=True) for t in translated]
+            # tgt_text = []
+            # for t in translated:
+            #     self.tokenizer.decode(t, skip_special_tokens=True)
+
             cur_translation_df["tgt_text"] = tgt_text
             self._update_cache(cur_translation_df)
-            return cur_translation_df.append(cached_dataframe)
+            cur_translation_df.set_index("src_text", inplace=True)
+            return cur_translation_df.append(cached_dataframe).reindex_like(query_indexes).reset_index()
+        cached_dataframe.set_index("src_text", inplace=True)
+        cached_dataframe = cached_dataframe.reindex_like(query_indexes)
+        cached_dataframe.reset_index(inplace=True)
         return cached_dataframe
 
 

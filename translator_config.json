@@ -1,28 +1,136 @@
 {
-  "heb": {
     "arb": {
-      "model_name":"Helsinki_NLP_opus-mt-heb-ara",
-      "special_tok": "ara"
-    }
-  },
-  "eng": {
-    "heb": {
-      "model_name":"Helsinki_NLP_opus-mt-en-he",
-      "special_tok": "he"
+        "eng": {
+            "model_name": "Helsinki_NLP_opus_mt_ar_en",
+            "special_tok": "en"
+        },
+        "fr": {
+            "model_name": "Helsinki_NLP_opus_mt_ar_fr",
+            "special_tok": "fr"
+        },
+        "fra": {
+            "model_name": "Helsinki_NLP_opus_mt_ar_fr",
+            "special_tok": "fr"
+        },
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_ara_heb",
+            "special_tok": "heb"
+        },
+        "rus": {
+            "model_name": "Helsinki_NLP_opus_mt_ara_rus",
+            "special_tok": "rus"
+        },
+        "spa": {
+            "model_name": "Helsinki_NLP_opus_mt_ara_spa",
+            "special_tok": "spa"
+        },
+        "tur": {
+            "model_name": "Helsinki_NLP_opus_mt_ara_tur",
+            "special_tok": "tur"
+        }
     },
-    "arb": {
-      "model_name": "Helsinki_NLP_opus-mt-eng-ara",
-      "special_tok": "ara"
-    }
-  },
-  "arb": {
-    "eng":{
-      "model_name": "Helsinki_NLP_opus-mt-ara-eng",
-      "special_tok": "en"
+    "de": {
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_de_he",
+            "special_tok": "he"
+        }
+    },
+    "ell": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_ell_ara",
+            "special_tok": "ara"
+        }
+    },
+    "eng": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_en_ar",
+            "special_tok": "ar"
+        },
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_en_he",
+            "special_tok": "he"
+        }
+    },
+    "es": {
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_es_he",
+            "special_tok": "he"
+        }
+    },
+    "fi": {
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_fi_he",
+            "special_tok": "he"
+        }
+    },
+    "fr": {
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_fr_he",
+            "special_tok": "he"
+        }
+    },
+    "fra": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_fra_ara",
+            "special_tok": "ara"
+        },
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_fr_he",
+            "special_tok": "he"
+        }
     },
     "heb": {
-      "model_name": "Helsinki_NLP_opus-mt-ara-heb",
-      "special_tok": "he"
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_heb_ara",
+            "special_tok": "ara"
+        },
+        "de": {
+            "model_name": "Helsinki_NLP_opus_mt_he_de",
+            "special_tok": "de"
+        },
+        "fi": {
+            "model_name": "Helsinki_NLP_opus_mt_he_fi",
+            "special_tok": "fi"
+        },
+        "sv": {
+            "model_name": "Helsinki_NLP_opus_mt_he_sv",
+            "special_tok": "sv"
+        }
+    },
+    "ita": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_ita_ara",
+            "special_tok": "ara"
+        }
+    },
+    "jpn": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_jpn_ara",
+            "special_tok": "ara"
+        }
+    },
+    "rus": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_rus_ara",
+            "special_tok": "ara"
+        }
+    },
+    "spa": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_spa_ara",
+            "special_tok": "ara"
+        }
+    },
+    "sv": {
+        "heb": {
+            "model_name": "Helsinki_NLP_opus_mt_sv_he",
+            "special_tok": "he"
+        }
+    },
+    "tur": {
+        "arb": {
+            "model_name": "Helsinki_NLP_opus_mt_tur_ara",
+            "special_tok": "ara"
+        }
     }
-  }
 }

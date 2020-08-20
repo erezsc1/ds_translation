@@ -91,21 +91,3 @@ def empty_cache():
                 if model_index in running_models.keys():
                     running_models[model_index].translation_df = pd.DataFrame(columns=["src_text", "tgt_text"])
     return True
-
-
-
-if __name__ == '__main__':
-    #query_1 = ["hello world"]
-    #query_2 = ["hello Ahmed"]
-    #query_3 = ["hello world", "hello Walid"]
-    query = [
-        "بالأمس ذهبت إلى محل بقالة",
-        "أخبر ديفيد عمه أنه اشترى تذاكر بسعر مخفض للفيلم الجديد"
-    ]
-
-    src_lang = "arb"
-    tgt_lang = "heb"
-
-    response = translate(source_lang=src_lang, target_lang=tgt_lang, data=query)
-
-    print(response)
